@@ -7,6 +7,18 @@ func runAppleScript(source: String) -> String? {
 }
 
 
+func getActiveBrowserTabURLAppleScriptCommand(_ appName: String) -> String? {
+	switch appName {
+	case "Google Chrome", "Brave Browser", "Microsoft Edge":
+		return "tell app \"\(appName)\" to get the URL of active tab of front window"
+	case "Safari":
+		return "tell app \"Safari\" to get URL of front document"
+	default:
+		return nil
+	}
+}
+
+
 func toJson<T>(_ data: T) throws -> String {
 	let json = try JSONSerialization.data(withJSONObject: data)
 	return String(data: json, encoding: .utf8)!
